@@ -4,14 +4,15 @@ Polis is an AI powered sentiment gathering platform. More organic than surveys a
 
 For a detailed methods paper, see [Polis: Scaling Deliberation by Mapping High Dimensional Opinion Spaces][methods-paper].
 
-   [methods-paper]: https://www.e-revistes.uji.es/index.php/recerca/article/view/5516/6558
+[methods-paper]: https://www.e-revistes.uji.es/index.php/recerca/article/view/5516/6558
 
 <!-- Changes to badge text in URLs below, require changes to "name" value in .github/workflows/*.yml -->
+
 [![Docker Image Builds](https://github.com/compdemocracy/polis/workflows/Docker%20image%20builds/badge.svg)][docker-image-builds]
 [![E2E Tests](https://github.com/compdemocracy/polis/workflows/E2E%20Tests/badge.svg)][e2e-tests]
 
-   [docker-image-builds]: https://hub.docker.com/u/compdem
-   [e2e-tests]: https://github.com/compdemocracy/polis/actions?query=workflow%3A%22E2E+Tests%22
+[docker-image-builds]: https://hub.docker.com/u/compdem
+[e2e-tests]: https://github.com/compdemocracy/polis/actions?query=workflow%3A%22E2E+Tests%22
 
 ---
 
@@ -27,12 +28,12 @@ If you're interested in using or contributing to Polis, please see the following
 - [🏗️ **project board**][board]: somewhat incomplete, but still useful; We stopped around the time that Projects Beta came out, and we have a [Projects Beta Board][beta-board] that we'll eventually be migrating to
 - [✉️ reach out][hello]: if you are applying Polis in a high-impact context, and need more help than you're able to get through the public channels above
 
-   [knowledge-base]: https://compdemocracy.org/Welcome
-   [issues]: https://github.com/compdemocracy/polis/issues
-   [board]: https://github.com/compdemocracy/polis/projects/1
-   [beta-board]: https://github.com/compdemocracy/polis/projects/1
-   [discussions]: https://github.com/compdemocracy/polis/discussions
-   [hello]: mailto:hello@compdemocracy.org
+  [knowledge-base]: https://compdemocracy.org/Welcome
+  [issues]: https://github.com/compdemocracy/polis/issues
+  [board]: https://github.com/compdemocracy/polis/projects/1
+  [beta-board]: https://github.com/compdemocracy/polis/projects/1
+  [discussions]: https://github.com/compdemocracy/polis/discussions
+  [hello]: mailto:hello@compdemocracy.org
 
 If you're trying to set up a Polis deployment or development environment, then please read the rest of this document 👇 ⬇️ 👇
 
@@ -76,7 +77,6 @@ Copy the example.env file and modify as needed (although it should just work as 
 ```sh
 cp example.env .env
 ```
-
 
 ```sh
 docker compose --profile postgres up --build
@@ -245,6 +245,21 @@ If this happens to you, try
 
 You may find it necessary to install some dependencies, namely nodejs and postgres stuff, in a [Rosetta terminal](https://support.apple.com/en-us/HT211861). Create an issue or reach out if you are having strange build issues on Apple computers.
 
-## ©️  License
+## ©️ License
 
 [AGPLv3 with additional permission under section 7](/LICENSE)
+
+## Deploying for DPS
+
+1. We started by going to the May 20 commit to get a stable build pre-delphi service
+2. We succeeded in building locally with a few changes: in .env, edit `DATABASE_URL` (line 32) from polis-test to polis-dev, run `docker compose --profile postgres --profile local-services up --build`
+3. We set up a virtual machine in GCE (Google Compute Engine). 4GB sufficient (so far)
+4. (The following instuctions are to modify once it is already set up) Access the virtual machine through SSH
+5. Run `sudo -s`, `tmux detach`
+6. use commands to switch between terminals
+7. git pull the repo for updated files
+8. restart file-server on docker
+
+considerations:
+no scaling, may want to consider a separate postgres database (e.g. aiven), may want to consider s3 bucket, gstorage, or netlify for file-server
+we have some security flags, not a big deal

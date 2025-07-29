@@ -18,7 +18,7 @@ export default (env, argv) => {
   const isDevelopment = !isProduction
 
   // Get API URL from CLI arg, env var, or default
-  const apiUrl = env?.apiUrl || process.env.API_URL || 'http://localhost:5000'
+  const apiUrl = env?.apiUrl || process.env.API_URL || 'http://localhost:5001'
 
   console.log(`Using API URL: ${apiUrl}`)
 

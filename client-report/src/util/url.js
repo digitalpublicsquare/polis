@@ -25,14 +25,14 @@ const hostname = self.location.hostname;
 const port = self.location.port;
 
 const getDomainPrefix = () => {
-  if (hostname === 'localhost') {
+  if (hostname === "localhost") {
     if (serviceUrl) return `${serviceUrl}/`;
-    if (port === '' || port === '80') return 'http://localhost/';
-    return 'http://localhost:5000/';
+    if (port === "" || port === "80") return "http://localhost/";
+    return "http://localhost:5001/";
   }
 
-  if (hostname.includes('pol.is')) return `https://${hostname}/`;
-  if (hostname.includes('polis.io')) return `https://${hostname}/`;
+  if (hostname.includes("pol.is")) return `https://${hostname}/`;
+  if (hostname.includes("polis.io")) return `https://${hostname}/`;
 
   if (serviceUrl) return `${serviceUrl}/`;
 

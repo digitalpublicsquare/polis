@@ -3,6 +3,7 @@
 # server, and exposing most ports. DO NOT USE THIS IN PRODUCTION.
 
 # This configuration does not work on its own and must be run together with docker-compose.yml,
+# docker compose --profile postgres --profile local-services -f docker-compose.yml -f docker-compose.dev.yml up --build
 # e.g. `docker compose --profile postgres -f docker-compose.yml -f docker-compose.dev.yml up`.
 # (Note the usage in Makefile.)
 # For more information see https://docs.docker.com/compose/extends/
@@ -19,7 +20,7 @@ services:
       - ./server:/app
       - /app/node_modules
     ports:
-      - "${API_SERVER_PORT:-5000}:${API_SERVER_PORT:-5000}"
+      - "${API_SERVER_PORT:-5001}:${API_SERVER_PORT:-5001}"
       - "9229:9229"
 
   math:

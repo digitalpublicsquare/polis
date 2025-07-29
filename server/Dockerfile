@@ -24,7 +24,7 @@ RUN apk add --no-cache --virtual .build \
 
 COPY package*.json ./
 
-EXPOSE 5000
+EXPOSE 5001
 
 
 # Define the development build

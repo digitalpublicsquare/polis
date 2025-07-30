@@ -15,25 +15,26 @@ ignorePatterns:
   - dist
 overrides:
   - files:
-    - "*.js"
+      - "*.js"
     excludedFiles:
-    - "**/*.test.js"
-    - "**/*/*.js"
+      - "**/*.test.js"
+      - "**/*/*.js"
     env:
       node: true
       browser: false
   - files:
-    - "**/*.test.js"
+      - "**/*.test.js"
     env:
       jest: true
 parser: "@babel/eslint-parser"
 parserOptions:
   ecmaVersion: latest
   sourceType: module
+  requireConfigFile: false
 plugins:
   - react
 rules:
   react/prop-types: warn
 settings:
   react:
-    version: 'detect'
+    version: "detect"

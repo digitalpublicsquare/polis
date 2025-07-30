@@ -263,3 +263,21 @@ You may find it necessary to install some dependencies, namely nodejs and postgr
 considerations:
 no scaling, may want to consider a separate postgres database (e.g. aiven), may want to consider s3 bucket, gstorage, or netlify for file-server
 we have some security flags, not a big deal
+
+## Running Locally for DPS
+
+`docker compose --profile postgres --profile local-services -f docker-compose.yml -f docker-compose.dev.yml up --build`
+
+## Making Changes for DPS
+
+### Changing Labels & Text
+
+`client-participation`
+
+To change labels, make changes in the [en_us.js](/client-participation/js/strings/en_us.js).
+
+### Changing the Survey Embed
+
+`client-participation`
+
+To change how the embeded survey looks, make changes in the [templates folder](/client-participation/js/templates/).

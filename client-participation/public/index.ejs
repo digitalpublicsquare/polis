@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Polis</title>
 
     <!-- Google tag (gtag.js) -->
     <% if (gaTrackingId) { %>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=<%= gaTrackingId %>"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=<%= gaTrackingId %>"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-        gtag('config', '<%= gaTrackingId %>');
-      </script>
+      gtag("config", "<%= gaTrackingId %>");
+    </script>
     <% } %>
 
     <!-- 100% privacy-first analytics -->
-    <script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-    <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif?collect-dnt=true" alt="" referrerpolicy="no-referrer-when-downgrade"/></noscript>
+    <script
+      data-collect-dnt="true"
+      async
+      src="https://scripts.simpleanalyticscdn.com/latest.js"
+    ></script>
+    <noscript
+      ><img
+        src="https://queue.simpleanalyticscdn.com/noscript.gif?collect-dnt=true"
+        alt=""
+        referrerpolicy="no-referrer-when-downgrade"
+    /></noscript>
 
     <!-- REPLACE_THIS_WITH_FB_META_TAGS -->
 
-    <link rel="stylesheet" type="text/css" href="/css/polis.css"> <!-- proxy all CSS through server for respond.js -->
+    <link rel="stylesheet" type="text/css" href="/css/polis.css" />
+    <!-- proxy all CSS through server for respond.js -->
 
     <script>
       window.userObject = {};
@@ -41,8 +56,8 @@
       }
       .screen-reader-text {
         border: 0;
-        clip: rect( 1px, 1px, 1px, 1px );
-        clip-path: inset( 50% );
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(50%);
         height: 1px;
         margin: -1px;
         overflow: hidden;
@@ -53,12 +68,17 @@
       }
     </style>
 
-    <script> // Fire off this ajax first. it's slower than the other CDN delivered things.
-      (function() {
+    <script>
+      // Fire off this ajax first. it's slower than the other CDN delivered things.
+      (function () {
         function parseQueryParams(queryString) {
           const params = new URLSearchParams(queryString);
           return Object.fromEntries(params);
         }
+        // Get Inner Class
+        var params = parseQueryParams(window.location.search);
+        var body = document.querySelector("body");
+        body.classList.add(params.inner_class);
 
         function getXid() {
           var params = parseQueryParams(window.location.search);
@@ -84,15 +104,15 @@
         function ajaxGet(url, success, fail) {
           var xmlhttp;
           xmlhttp = new XMLHttpRequest();
-          xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-              if(xmlhttp.status == 200){
+          xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+              if (xmlhttp.status == 200) {
                 success(JSON.parse(xmlhttp.responseText));
               } else {
                 fail(xmlhttp.status, xmlhttp.responseText);
               }
             }
-          }
+          };
 
           xmlhttp.open("GET", url, true);
           xmlhttp.send();
@@ -103,7 +123,7 @@
         var p = window.preload;
 
         function fixupConversation(c) {
-          var t = c.translations
+          var t = c.translations;
           if (t && t.length) {
             c.topic = t[0].topic;
             c.description = t[0].description;
@@ -113,17 +133,42 @@
 
         function onPreloadOk(response) {
           var things = [
-            {src:"nextComment", dst:"firstComment", cb:"firstCommentListener"},
-            {src:"conversation", dst:"firstConv", cb:"firstConvListener", fn:fixupConversation},
-            {src:"user", dst:"firstUser", cb:"firstUserListener"},
-            {src:"ptpt", dst:"firstPtpt", cb:"firstPtptListener"},
-            {src:"votes", dst:"firstVotesByMe", cb:"firstVotesByMeListener"},
-            {src:"pca", dst:"firstMath", cb:"firstMathListener", JSON: true},
-            {src:"famous", dst:"firstFamous", cb:"firstFamousListener"},
-            {src:"acceptLanguage", dst:"acceptLanguage", cb:"acceptLanguageListener"},
+            {
+              src: "nextComment",
+              dst: "firstComment",
+              cb: "firstCommentListener",
+            },
+            {
+              src: "conversation",
+              dst: "firstConv",
+              cb: "firstConvListener",
+              fn: fixupConversation,
+            },
+            { src: "user", dst: "firstUser", cb: "firstUserListener" },
+            { src: "ptpt", dst: "firstPtpt", cb: "firstPtptListener" },
+            {
+              src: "votes",
+              dst: "firstVotesByMe",
+              cb: "firstVotesByMeListener",
+            },
+            {
+              src: "pca",
+              dst: "firstMath",
+              cb: "firstMathListener",
+              JSON: true,
+            },
+            { src: "famous", dst: "firstFamous", cb: "firstFamousListener" },
+            {
+              src: "acceptLanguage",
+              dst: "acceptLanguage",
+              cb: "acceptLanguageListener",
+            },
           ];
           for (var i = 0; i < things.length; i++) {
-            var r = things[i], src = r.src, dst = r.dst, cb = r.cb;
+            var r = things[i],
+              src = r.src,
+              dst = r.dst,
+              cb = r.cb;
 
             if (response) {
               p[dst] = r.JSON ? JSON.parse(response[src]) : response[src];
@@ -165,8 +210,12 @@
             function updateDomainMessage() {
               var el = document.getElementById("badDomainMessage");
               if (el) {
-                el.className = el.className.replace( /(?:^|\s)displaynone(?!\S)/g , '');
-                document.getElementById("mainSpinner").className += " displaynone";
+                el.className = el.className.replace(
+                  /(?:^|\s)displaynone(?!\S)/g,
+                  ""
+                );
+                document.getElementById("mainSpinner").className +=
+                  " displaynone";
                 clearInterval(updateDomainIntervalRef);
               }
             }
@@ -184,7 +233,7 @@
 
         window.xsThresh = 600; // nexus 7
 
-        window.getPtptoiLimitForWidth = function(w) {
+        window.getPtptoiLimitForWidth = function (w) {
           return w < window.xsThresh ? 25 : void 0;
         };
 
@@ -202,7 +251,9 @@
         var x_profile_image_url = get_x_profile_image_url();
         if (typeof x_profile_image_url !== "undefined") {
           window.preload.x_profile_image_url = x_profile_image_url;
-          qp.push("x_profile_image_url=" + encodeURIComponent(x_profile_image_url));
+          qp.push(
+            "x_profile_image_url=" + encodeURIComponent(x_profile_image_url)
+          );
         }
         var x_name = get_x_name();
         if (typeof x_name !== "undefined") {
@@ -223,33 +274,55 @@
         }
 
         var qp = qp.join("&");
-        qp = qp.length > 1 ? ("?" + qp) : "";
+        qp = qp.length > 1 ? "?" + qp : "";
 
-        ajaxGet("/api/v3/participationInit" + qp,
-          onPreloadOk,
-          onPreloadFail);
-
-      }());
+        ajaxGet("/api/v3/participationInit" + qp, onPreloadOk, onPreloadFail);
+      })();
     </script>
   </head>
 
-  <body class="clickDeselectsHull" style="margin:0; background-color: white;">
-
-    <p id="mainSpinner" style="text-align:center; margin: auto; width:100%; display: none">
-      <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-      <path fill="rgba(0,0,0,0.5)" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
-        <animateTransform attributeType="xml"
-          attributeName="transform"
-          type="rotate"
-          from="0 25 25"
-          to="360 25 25"
-          dur="1.0s"
-          repeatCount="indefinite"/>
+  <body class="clickDeselectsHull" style="margin: 0">
+    <p
+      id="mainSpinner"
+      style="text-align: center; margin: auto; width: 100%; display: none"
+    >
+      <svg
+        version="1.1"
+        id="loader-1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px"
+        y="0px"
+        width="40px"
+        height="40px"
+        viewBox="0 0 50 50"
+        style="enable-background: new 0 0 50 50"
+        xml:space="preserve"
+      >
+        <path
+          fill="rgba(0,0,0,0.5)"
+          d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z"
+        >
+          <animateTransform
+            attributeType="xml"
+            attributeName="transform"
+            type="rotate"
+            from="0 25 25"
+            to="360 25 25"
+            dur="1.0s"
+            repeatCount="indefinite"
+          />
         </path>
       </svg>
     </p>
-    <p id="badDomainMessage" class="HeadingC displaynone" style="text-align:center; margin: 40px;">This conversation can't be viewed from this domain. Contact the creator of the conversation to find out where you can access it.</p>
+    <p
+      id="badDomainMessage"
+      class="HeadingC displaynone"
+      style="text-align: center; margin: 40px"
+    >
+      This conversation can't be viewed from this domain. Contact the creator of
+      the conversation to find out where you can access it.
+    </p>
 
     <script>
       if (window.top !== window) {
@@ -260,5 +333,5 @@
         document.getElementsByTagName("body")[0].setAttribute("lang", ui_lang);
       }
     </script>
-</body>
+  </body>
 </html>

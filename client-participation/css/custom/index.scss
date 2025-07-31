@@ -1,6 +1,38 @@
 body {
-  background: purple;
-  .lyn & {
-    border: blue solid 1px;
+  &.lyn {
+    background: #0089c8;
+
+    .conversationViewRoot {
+      background-color: transparent !important;
+      #helpTextWelcome {
+        display: none;
+      }
+      #readReactView {
+        margin-bottom: 0px !important;
+        .lightPanel {
+          display: none;
+          &.custom_gutter {
+            background: #c1eaff;
+            border-radius: 20px;
+            display: block;
+            #comment_shower {
+              padding-top: 20px;
+              .social-image {
+                display: none;
+              }
+              .social-name {
+                display: none !important;
+              }
+              .x-wrote {
+                display: none;
+              }
+              .comment-text {
+                top: 0px !important;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

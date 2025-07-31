@@ -75,10 +75,12 @@
           const params = new URLSearchParams(queryString);
           return Object.fromEntries(params);
         }
-        // Get Inner Class
-        var params = parseQueryParams(window.location.search);
-        var body = document.querySelector("body");
-        body.classList.add(params.inner_class);
+        document.addEventListener("DOMContentLoaded", (e) => {
+          // Get Inner Class
+          var params = parseQueryParams(window.location.search);
+          var body = document.querySelector("body");
+          body.classList.add(params.inner_class);
+        });
 
         function getXid() {
           var params = parseQueryParams(window.location.search);

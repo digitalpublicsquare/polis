@@ -65,6 +65,7 @@
 
     {{! social stuff }}
     <img
+    class="social-image"
       src="{{social.img}}"
       alt=""
       style="
@@ -78,6 +79,7 @@
         "
       ></img>
     <p
+    class="social-name"
       style="
         display: inline;
         position: relative;
@@ -86,7 +88,7 @@
         font-weight: 300;
     ">
       {{social.name}}
-      <span style="
+      <span class="x-wrote" style="
       ">
         {{#if quote_src_url}}
           <a href="{{quote_src_url}}" target="_blank">{{s.x_wrote}}</a>
@@ -108,7 +110,7 @@
         {{remainingString}}
       </span>
     </p>
-    <p lang="{{lang}}" style="
+    <p class="comment-text" lang="{{lang}}" style="
       {{pMarginStyle}} {{!-- 10 + 36 + 5 from social above --}}
       font-weight: 400;
       min-height: 65px;

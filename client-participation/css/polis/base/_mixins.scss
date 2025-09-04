@@ -56,6 +56,7 @@
   @include fa();
   content: "\f080";
 }
+
 // end icon mixins
 
 //-----------------------------------------------------------------------------
@@ -75,5 +76,68 @@
 @mixin font-size($sizeValue: 16px) {
   font-size: $sizeValue;
   font-size: calc($sizeValue / 10px) + rem;
+}
+
+@mixin leadTextBold() {
+  /* Lead Text (bold) */
+  font-family: var(--Font-Properties-body-font-family, "League Spartan");
+  font-size: var(--Font-Size-body-lg, 2.5rem);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%; /* 3.25rem */
+  letter-spacing: -0.05rem;
+}
+
+@mixin paragraphLeadBold {
+  /* Paragraph Lead (Bold) */
+  font-family: var(--Font-Properties-body-font-family, "League Spartan");
+  font-size: var(--Font-Size-body-md, 2.0625rem);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%; /* 2.68125rem */
+}
+
+@mixin paragraphLead {
+  /* Paragraph Lead */
+  font-family: var(--Font-Properties-body-font-family, "League Spartan");
+  font-size: var(--Font-Size-body-md, 2.0625rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+}
+
+@mixin buttonBold {
+  color: var(--Text-Colours-text-primary, #000);
+  leading-trim: both;
+  text-edge: cap;
+  font-family: var(--Font-Properties-body-font-family, "League Spartan");
+  font-size: var(--Font-Size-body-md, 2.0625rem);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 148%; /* 3.0525rem */
+  letter-spacing: -0.04125rem;
+}
+
+@mixin buttonSmall {
+  color: var(--Text-Colours-text-primary, #000);
+  leading-trim: both;
+
+  text-edge: cap;
+  font-family: var(--Font-Properties-body-font-family, "League Spartan");
+  font-size: var(--Font-Size-body-base, 1.25rem);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 148%; /* 1.85rem */
+  letter-spacing: -0.025rem;
+}
+
+@mixin footerSmall {
+  color: var(--Text-Colours-text-primary, #000);
+  text-align: center;
+  font-family: var(--Font-Properties-body-font-family, "League Spartan");
+  font-size: var(--Font-Size-body-base, 1.25rem);
+  font-style: normal;
+  font-weight: 300;
+  line-height: 148%; /* 1.85rem */
 }
 // end font sizing

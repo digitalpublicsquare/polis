@@ -3,6 +3,7 @@
 {{!-- ================ PROTIPS ================ --}}
 
 <div
+  class="protips"
   style="
     {{#if no_write_hint}}visibility: hidden;{{/if}}
     {{!--
@@ -104,17 +105,21 @@
 
   <form
     role="form"
+    class="comment-form"
     style="padding-bottom: 1px; {{! no stripe of background_content color mobile }}
     ">
 
     {{!-- ================ SOCIAL PICTURE && TEXT AREA ================ --}}
-    <div style="display: table; width: 100%" dir={{direction}}>
+    <div class="social-picture-text" dir={{direction}}>
       {{#unless is_anon}}
-      <span style="display: table-cell">
-        {{view profilePicView}}
+      <span>
+        <div class="social-image-container">
+     <i class="svgIcon-animal">{{> iconCat}}</i>
+
+    </div>
       </span>
       {{/unless}}
-      <span style="display: table-cell; width: 100%">
+      <span class="textarea">
         <textarea
           class="form-control"
           id="comment_form_textarea"
@@ -183,25 +188,12 @@
           Btn
           Btn-primary
           unselectable
+          comment-button
           "
         id="comment_button"
 
         type="submit"
-        style="
-          text-transform: none;
-          font-size: 16px;
-          font-weight: 500;
-          cursor: pointer;
-          border: none;
-          border-radius: 4px;
-          background-color: #0090ff;
-          color: white;
-          letter-spacing: 0.07em;
-          min-width: 110px;
-          height: 40px;
-          margin-inline-start: 5px;
-          {{customBtnStyles}}
-          ">
+       >
         {{s.submitComment}}
       </button>
    </div>

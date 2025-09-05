@@ -25,7 +25,6 @@
     var o = {};
     for (var i = 0; i < pairStrings.length; i++) {
       var pair = pairStrings[i].split("=");
-      console.log(pair);
       o[pair[0]] = decodeURIComponent(pair[1]);
     }
     return o;
@@ -91,7 +90,6 @@
     function appendIfPresent(name) {
       if (o[name] !== null && o[name] !== void 0) {
         paramStrings.push(name + "=" + encodeURIComponent(o[name]));
-        console.log(paramStrings);
       }
     }
     if (o.conversation_id) {
@@ -234,7 +232,6 @@
             }
           }
           if (!resizeWasHandled) {
-            console.log(data.polisFrameId);
             var frameId = "polis_" + data.polisFrameId;
             var iframe = document.getElementById(frameId);
             var h = data.height;

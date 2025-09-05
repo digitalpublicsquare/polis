@@ -52,10 +52,42 @@ body {
                   align-items: center;
                   aspect-ratio: 1/1;
                   border-radius: 1.25rem;
-                  background: var(
-                    --Block-Colours-background-Block-Colours-2,
-                    #ffbf00
-                  );
+                  .icon-cat-image {
+                    display: none;
+                  }
+                  .icon-ram-image {
+                    display: none;
+                  }
+                  .icon-bird-image {
+                    display: none;
+                  }
+                  &.icon-cat {
+                    background: var(
+                      --Block-Colours-background-Block-Colours-3,
+                      #ff8fb1
+                    );
+                    .icon-cat-image {
+                      display: block;
+                    }
+                  }
+                  &.icon-ram {
+                    background: var(
+                      --Block-Colours-background-Block-Colours-2,
+                      #ffbf00
+                    );
+                    .icon-ram-image {
+                      display: block;
+                    }
+                  }
+                  &.icon-bird {
+                    background: var(
+                      --Block-Colours-background-Block-Colours-5,
+                      #f66625
+                    );
+                    .icon-bird-image {
+                      display: block;
+                    }
+                  }
                 }
                 .comment-content {
                   width: 100%;
@@ -154,8 +186,8 @@ body {
               aspect-ratio: 1/1;
               border-radius: 1.25rem;
               background: var(
-                --Block-Colours-background-Block-Colours-2,
-                #ffbf00
+                --Block-Colours-background-Block-Colours-4,
+                #00be77
               );
             }
             .textarea {

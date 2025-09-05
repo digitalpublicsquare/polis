@@ -371,7 +371,6 @@ $.when(preloadHelper.acceptLanguagePromise, uidPromise).always(function () {
     // set up the "exitConv" event
     var currentRoute;
     router.on("route", function (route, params) {
-      console.log("route changed from: " + currentRoute + " to: " + route);
       if (currentRoute === "conversationView") {
         eb.trigger(eb.exitConv);
       }

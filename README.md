@@ -254,11 +254,20 @@ You may find it necessary to install some dependencies, namely nodejs and postgr
 1. We started by going to the May 20 commit to get a stable build pre-delphi service
 2. We succeeded in building locally with a few changes: in .env, edit `DATABASE_URL` (line 32) from polis-test to polis-dev, run `docker compose --profile postgres --profile local-services up --build`
 3. We set up a virtual machine in GCE (Google Compute Engine). 4GB sufficient (so far)
-4. (The following instuctions are to modify once it is already set up) Access the virtual machine through SSH
-5. Run `sudo -s`, `tmux detach`
-6. use commands to switch between terminals
-7. git pull the repo for updated files
-8. restart file-server on docker
+
+Setting up in GCE
+1. Access the virtual machine through SSH
+2. Run `sudo -s`, `tmux`
+3. If you run `tmux attach`, use commands to switch between terminals
+4. git pull the repo for updated files
+5. run `docker compose --profile postgres --profile local-services up --build`
+
+Updating in GCE
+1. Access the virtual machine through SSH
+2. Run `sudo -s`, `tmux attach`
+3. Switch terminals to the tmux terminal
+4. git pull the repo for updated files
+5. restart file-server on docker
 
 considerations:
 no scaling, may want to consider a separate postgres database (e.g. aiven), may want to consider s3 bucket, gstorage, or netlify for file-server

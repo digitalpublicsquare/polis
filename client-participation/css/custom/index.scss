@@ -48,10 +48,15 @@ body {
                   // padding: 2.25rem 2rem 2.25rem 2.625rem;
                   height: 7.75rem;
                   width: 7.75rem;
+                  @media (max-width: 750px) {
+                    width: 2.9rem;
+                    height: 2.9rem;
+                  }
                   justify-content: center;
                   align-items: center;
                   aspect-ratio: 1/1;
                   border-radius: 1.25rem;
+
                   .icon-cat-image {
                     display: none;
                   }
@@ -127,24 +132,27 @@ body {
               }
 
               .reactionButtons {
-                // display: none;
-                //          display: -webkit-box;
-                // display: -moz-box;
-                // display: -ms-flexbox;
-                // display: -webkit-flex;
-                // display: flex;
-                // -webkit-flex-flow: row wrap;
-                // justify-content: space-around;
-                // margin-bottom: 20px;
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
+                flex-direction: row;
+                margin-top: 1.5rem;
+                @media (max-width: 750px) {
+                  flex-direction: column;
+                }
                 .reactionButton {
                   @include buttonBold();
                   display: flex;
                   gap: 0.62rem;
                   align-items: center;
                   margin-top: 1.8rem;
+                  @media (max-width: 750px) {
+                    background: #f9f8f6;
+                    width: 100%;
+                    border-radius: 100px;
+                    justify-content: center;
+                    margin-top: 6px;
+                  }
                   i {
                     &.svgIcon {
                       width: unset;
@@ -168,66 +176,87 @@ body {
           display: none;
         }
         .comment-form {
+          // The entire form
           width: 100%;
           display: flex;
           gap: 1.25rem;
           justify-content: center;
-          .social-picture-text {
+          flex-direction: column;
+          // The picture and text box and button
+          .top-container {
+            // The picture and text box
+
             display: flex;
-            gap: 1.25rem;
-            flex-grow: 1;
-            .social-image-container {
+            flex-direction: row;
+            .social-picture-text {
               display: flex;
-              // padding: 2.25rem 2rem 2.25rem 2.625rem;
-              height: 5.18rem;
-              width: 5.18rem;
-              justify-content: center;
-              align-items: center;
-              aspect-ratio: 1/1;
-              border-radius: 1.25rem;
-              background: var(
-                --Block-Colours-background-Block-Colours-4,
-                #00be77
-              );
-            }
-            .textarea {
+              gap: 1.25rem;
               flex-grow: 1;
-              height: 100%;
-              textarea {
-                height: 100% !important;
+              .social-image-container {
+                display: flex;
+                // padding: 2.25rem 2rem 2.25rem 2.625rem;
+                height: 5.18rem;
+                width: 5.18rem;
+                justify-content: center;
+                align-items: center;
+                aspect-ratio: 1/1;
+                border-radius: 1.25rem;
+                background: var(
+                  --Block-Colours-background-Block-Colours-4,
+                  #00be77
+                );
+              }
+              .textarea {
+                flex-grow: 1;
+                // height: 100%;
+                textarea {
+                  height: 100% !important;
+                }
               }
             }
-          }
-          button {
-            &.comment-button {
-              @include buttonSmall();
-              display: flex;
-              padding: var(--Buttons-margins-default, 1.25rem)
-                var(--Buttons-margins-md, 1.875rem);
-              justify-content: center;
-              align-items: center;
-              gap: 0.625rem;
-              border-radius: 6.25rem;
-              background: var(--Buttons-colours-fill-bg-invert, #ffbf00);
+            .comment_form_control_hideable {
+              .submit-button-char-count {
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+                @media (max-width: 750px) {
+                  flex-direction: column;
+                }
+              }
             }
+            // The submit button
+            button {
+              &.comment-button {
+                @include buttonSmall();
+                align-self: center;
+                display: flex;
+                padding: var(--Buttons-margins-default, 1.25rem)
+                  var(--Buttons-margins-md, 1.875rem);
+                justify-content: center;
+                align-items: center;
+                gap: 0.625rem;
+                border-radius: 6.25rem;
+                background: var(--Buttons-colours-fill-bg-invert, #ffbf00);
+              }
+            }
+            @media (max-width: 750px) {
+              flex-direction: column;
+              gap: 1.25rem;
+            }
+          }
+          .submit-button-response {
+            width: 100% !important;
           }
         }
       }
     }
+    .footer {
+      @include footerSmall();
+      text-align: center;
+      a {
+        color: black;
+        text-decoration: underline;
+      }
+    }
   }
 }
-//  style="
-//           text-transform: none;
-//           font-size: 16px;
-//           font-weight: 500;
-//           cursor: pointer;
-//           border: none;
-//           border-radius: 4px;
-//           background-color: #0090ff;
-//           color: white;
-//           letter-spacing: 0.07em;
-//           min-width: 110px;
-//           height: 40px;
-//           margin-inline-start: 5px;
-//           {{customBtnStyles}}
-//           "

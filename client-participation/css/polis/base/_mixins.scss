@@ -116,6 +116,8 @@
   font-weight: 700;
   line-height: 148%; /* 3.0525rem */
   letter-spacing: -0.04125rem;
+  @media (max-width: 750px) {
+  }
 }
 
 @mixin buttonSmall {

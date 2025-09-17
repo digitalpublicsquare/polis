@@ -16,59 +16,63 @@ var $ = require("jquery");
 var Backbone = require("backbone");
 
 module.exports = PolisModelView.extend({
-
   selectedGid: -1,
 
-  groupInfo: function() {
+  groupInfo: function () {
     return this.serverClient.getGroupInfo(this.selectedGid);
   },
 
-  updateVotesByMeCollection: function(isFirstFetch) {
+  updateVotesByMeCollection: function (isFirstFetch) {
     if (Utils.isDemoMode()) {
       return;
     }
     if (isFirstFetch) {
-      preloadHelper.firstVotesByMePromise.then(function(votes) {
-        this.votesByMe.add(votes);
-      }.bind(this));
+      preloadHelper.firstVotesByMePromise.then(
+        function (votes) {
+          if (votes.length) {
+            console.log("here");
+            this.votesByMe.add(votes);
+          }
+        }.bind(this)
+      );
     } else {
       this.votesByMe.fetch({
         data: $.param({
           conversation_id: this.conversation_id,
           pid: "mypid",
         }),
-        reset: false
+        reset: false,
       });
     }
   },
 
-  allowMetadataFiltering: function() {
+  allowMetadataFiltering: function () {
     return true;
   },
 
-  emphasizeParticipants: function() {},
+  emphasizeParticipants: function () {},
 
-  destroyPopovers: function() {
+  destroyPopovers: function () {
     popoverEach("destroy");
   },
-  onClusterTapped: function(gid) {
+  onClusterTapped: function (gid) {
     this.selectedGid = gid;
     this.destroyPopovers();
   },
 
-  initialize: function(options) {
+  initialize: function (options) {
     // init this pronto so we can load the votes view asap
     this.votesByMe = new VotesCollection();
     PolisModelView.prototype.initialize.apply(this, arguments);
     var that = this;
-    var conversation_id = this.conversation_id = this.model.get("conversation_id");
-    var zinvite = this.zinvite = this.model.get("zinvite");
+    var conversation_id = (this.conversation_id =
+      this.model.get("conversation_id"));
+    var zinvite = (this.zinvite = this.model.get("zinvite"));
 
     this.allCommentsCollection = new CommentsCollection();
     this.allCommentsCollection.firstFetchPromise = $.Deferred();
 
-
-    eb.on(eb.clusterSelectionChanged, function(gid) {
+    eb.on(eb.clusterSelectionChanged, function (gid) {
       that.selectedGid = gid;
     });
 
@@ -83,12 +87,11 @@ module.exports = PolisModelView.extend({
     //   processData: true
     // });
 
-
     that.serverClient = new ServerClient({
       conversation_id: conversation_id,
       zinvite: zinvite,
       tokenStore: PolisStorage.token,
-      getPtptoiLimit: function() {
+      getPtptoiLimit: function () {
         return 99;
         // return window.getPtptoiLimitForWidth(display.getCachedWidth());
       },
@@ -96,39 +99,36 @@ module.exports = PolisModelView.extend({
       //commentsStore: PolisStorage.comments,
       //reactionsByMeStore: PolisStorage.reactionsByMe,
       utils: window.utils,
-      logger: console
+      logger: console,
     });
 
     this.updateVotesByMeCollection(1);
-    this.serverClient.addPollingScheduledCallback(function() {
+    this.serverClient.addPollingScheduledCallback(function () {
       that.updateVotesByMeCollection();
     });
     this.serverClient.startPolling();
 
-
-    this.allCommentsCollection.fetch = this.allCommentsCollection.doFetch = function(o) {
-      var thatCollection = this;
-      var params = {
-        gid: o.gid,
-        conversation_id: conversation_id
+    this.allCommentsCollection.fetch = this.allCommentsCollection.doFetch =
+      function (o) {
+        var thatCollection = this;
+        var params = {
+          gid: o.gid,
+          conversation_id: conversation_id,
+        };
+        var promise = Backbone.Collection.prototype.fetch.call(this, {
+          data: $.param(params),
+          processData: true,
+          silent: true,
+          ajax: function () {
+            return that.serverClient.getFancyComments(params);
+          },
+        });
+        promise.then(this.firstFetchPromise.resolve);
+        promise.then(function () {
+          thatCollection.trigger("reset");
+        });
+        return promise;
       };
-      var promise = Backbone.Collection.prototype.fetch.call(this, {
-        data: $.param(params),
-        processData: true,
-        silent: true,
-        ajax: function() {
-          return that.serverClient.getFancyComments(params);
-        }
-      });
-      promise.then(this.firstFetchPromise.resolve);
-      promise.then(function() {
-        thatCollection.trigger("reset");
-      });
-      return promise;
-    };
-
-
-
 
     //  // CHILD VIEWS
 
@@ -152,10 +152,8 @@ module.exports = PolisModelView.extend({
     // });
 
     // Clicking on the background dismisses the popovers.
-    this.$el.on("click", function() {
+    this.$el.on("click", function () {
       that.destroyPopovers();
     });
-
-
-  }
+  },
 });

@@ -153,13 +153,14 @@
 
     iframe.src = src;
     iframe.width = "100%"; // may be constrained by parent div
-    iframe.style.maxWidth = window.innerWidth + "px";
-    iframe.height = o.height || 930;
-    iframe.style.border = o.border || "1px solid #ccc";
-    iframe.style.borderRadius = o.border_radius || "4px";
-    iframe.style.padding = o.padding || "4px"; // 1px ensures that right border shows up on default wordpress theme
+    // iframe.style.maxWidth = window.innerWidth + "px";
+    // iframe.height = o.height || 930;
+    // iframe.style.border = o.border || "1px solid #ccc";
+    // iframe.style.borderRadius = o.border_radius || "4px";
+    // iframe.style.padding = o.padding || "4px"; // 1px ensures that right border shows up on default wordpress theme
     // iframe.style.backgroundColor = "white";
     // iframe.style.backgroundColor = "rgb(247, 247, 247)";
+    iframe.style.borderStyle = "none";
     iframe.id = id;
     iframe.classList.add(o.inner_class);
     iframe.setAttribute("data-test-id", "polis-iframe");

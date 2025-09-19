@@ -62,17 +62,7 @@
 //-----------------------------------------------------------------------------
 // Font sizing
 //-----------------------------------------------------------------------------
-// calculateRem($size)          convert 16px -> 1rem
-// font-size($size)             use rem & fall-back pixel styles
-//
-// @function calculateRem($size) {
-//   $remSize: $size / 16px;
-//   @return #{$remSize}rem;
-// }
-// @mixin font-size($size) {
-//   font-size: $size;
-//   font-size: calculateRem($size);
-// }
+
 @mixin font-size($sizeValue: 16px) {
   font-size: $sizeValue;
   font-size: calc($sizeValue / 10px) + rem;

@@ -1,21 +1,24 @@
-// h2 {
-//   color: red;
-//   &.HeadingA {
-//     color: blue;
-//     // color: var(--Text-Colours-text-primary, #000);
-//     text-align: center;
-//     @include leadTextBold();
-//   }
-// }
-//  {{!-- style="
-//           {{pMarginStyle}} {{!-- 10 + 36 + 5 from social above --}}
-
-//           {{customStyles}}" --}}
 html {
   font-size: 80%;
 }
 body {
   --background: #e6f8f1;
+  --padding: 10px;
+  --Font-Size-body-lg: 2.5rem;
+  --Font-Size-body-md: 2.0625rem;
+  --Font-Size-body-base: 1.25rem;
+  @media (max-width: 750px) {
+    --padding: 7px;
+    --Font-Size-body-lg: 1.875rem;
+    --Font-Size-body-md: 1.625rem;
+    --Font-Size-body-base: 1.25rem;
+  }
+  @media (max-width: 500px) {
+    --padding: 3px;
+    --Font-Size-body-lg: 1.25rem;
+    --Font-Size-body-md: 1.25rem;
+    --Font-Size-body-base: 1rem;
+  }
 
   &.lyn {
     font-size: 62.5%;
@@ -24,6 +27,9 @@ body {
       @include leadTextBold();
       color: var(--Text-Colours-text-primary, #000);
       text-align: center;
+    }
+    p {
+      margin: 0 0 var(--padding);
     }
 
     .conversationViewRoot {
@@ -49,8 +55,20 @@ body {
                   height: 7.75rem;
                   width: 7.75rem;
                   @media (max-width: 750px) {
+                    width: 3.5rem;
+                    height: 3.5rem;
+                    svg {
+                      width: 1.688rem;
+                      height: 1.688rem;
+                    }
+                  }
+                  @media (max-width: 500px) {
                     width: 2.9rem;
                     height: 2.9rem;
+                    svg {
+                      width: 1.688rem;
+                      height: 1.688rem;
+                    }
                   }
                   justify-content: center;
                   align-items: center;
@@ -153,6 +171,7 @@ body {
                     justify-content: center;
                     margin-top: 6px;
                   }
+
                   i {
                     &.svgIcon {
                       width: unset;
@@ -205,6 +224,22 @@ body {
                   --Block-Colours-background-Block-Colours-4,
                   #00be77
                 );
+                @media (max-width: 750px) {
+                  width: 3.5rem;
+                  height: 3.5rem;
+                  svg {
+                    width: 1.688rem;
+                    height: 1.688rem;
+                  }
+                }
+                @media (max-width: 500px) {
+                  width: 2.9rem;
+                  height: 2.9rem;
+                  svg {
+                    width: 1.688rem;
+                    height: 1.688rem;
+                  }
+                }
               }
               .textarea {
                 flex-grow: 1;

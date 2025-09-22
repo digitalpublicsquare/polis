@@ -252,15 +252,27 @@ You may find it necessary to install some dependencies, namely nodejs and postgr
 ## Deploying for DPS
 
 1. We started by going to the May 20 commit to get a stable build pre-delphi service
-2. We succeeded in building locally with a few changes: in .env, edit `DATABASE_URL` (line 32) from polis-test to polis-dev, run `docker compose --profile postgres --profile local-services up --build`
-3. We set up a virtual machine in GCE (Google Compute Engine). 4GB sufficient (so far)
-4. (The following instuctions are to modify once it is already set up) Access the virtual machine through SSH
-5. Run `sudo -s`, `tmux detach`
-6. use commands to switch between terminals
-7. git pull the repo for updated files
-8. restart file-server on docker
+2. We set up a virtual machine in GCE (Google Compute Engine). We used a e2-custom-medium (1 vCPUs, 5 GB memory) instance with a 20GB boot disk. We allowed HTTP and HTTPS traffic.
+3. Access the virtual machine through SSH
+4. Run `sudo -s; cd`
+5. Install node, git, docker, docker-compose, and make;
+6. Git pull the repo
+7. Create `prod.env` from `example.prod.env`; update the port and domain name accordingly (see below for instructions on how to link the domain to this server).
+8. Build and start the server by `make PROD start-server`
+9. In future updates, use the same command `make PROD start-rebuild` to rebuild the server;
 
-considerations:
+## Set up HTTPS and domain name
+
+At the moment we use Netlify as a quick way to get a domain name and HTTPS. Here are the steps:
+
+1. Open netlify/netlify.toml and update the IP address in the `to` variable to the external IP address of your GCE instance.
+2. Create a new site in netlify.
+3. Upload the netlify folder manually to netlify (drag and drop).
+4. Update the domain name in `prod.env` to the domain name assigned by netlify.
+
+In the future, we may want to set up our own domain name and HTTPS using certbot.
+
+Considerations:
 no scaling, may want to consider a separate postgres database (e.g. aiven), may want to consider s3 bucket, gstorage, or netlify for file-server
 we have some security flags, not a big deal
 

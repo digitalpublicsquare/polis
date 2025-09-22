@@ -58,6 +58,9 @@ pull: echo_vars ## Pull most recent Docker container builds (nightlies)
 start: echo_vars ## Start all Docker containers
 	docker compose ${COMPOSE_FILE_ARGS} --env-file ${ENV_FILE} up ${DETACH_ARG}
 
+start-server: echo_vars ## Start all Docker containers
+	docker compose ${COMPOSE_FILE_ARGS} --env-file ${ENV_FILE} up ${DETACH_ARG} -d
+
 dev: echo_vars
 	docker compose --profile postgres --profile local-services -f docker-compose.yml -f docker-compose.dev.yml up --build --force-recreate
 

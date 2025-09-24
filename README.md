@@ -257,9 +257,10 @@ You may find it necessary to install some dependencies, namely nodejs and postgr
 4. Run `sudo -s; cd`
 5. Install node, git, docker, docker-compose, and make;
 6. Git pull the repo
-7. Create `prod.env` from `example.prod.env`; update the port and domain name accordingly (see below for instructions on how to link the domain to this server).
-8. Build and start the server by `make PROD start-server`
-9. In future updates, use the same command `make PROD start-rebuild` to rebuild the server;
+7. Copy `.env` from `example.env`
+8. Edit the `DPS CONFIG` section and update the port and domain name accordingly (see below for instructions on how to link the domain to this server).
+9. Build and start the server by `make start-server`;
+10. For future updates, use the same command `make start-server` to rebuild and restart the server after `git pull`.;
 
 ## Set up HTTPS and domain name
 

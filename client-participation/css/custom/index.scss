@@ -2,7 +2,6 @@ html {
   font-size: 80%;
 }
 body {
-  --background: #e6f8f1;
   --padding: 10px;
   --Font-Size-body-lg: 2.5rem;
   --Font-Size-body-md: 2.0625rem;
@@ -20,7 +19,14 @@ body {
     --Font-Size-body-base: 1rem;
   }
 
+  &.kitsilano {
+    --background: #e6f3fa;
+  }
   &.lyn {
+    --background: #e6f8f1;
+  }
+  &.lyn,
+  &.kitsilano {
     font-size: 62.5%;
     background: var(--background);
     h2 {
